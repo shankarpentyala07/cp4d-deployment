@@ -24,7 +24,7 @@ pipeline {
         string(name: 'cpd_external_username', defaultValue: 'cp', description: 'URL to external username for CPD install. Note: CPD images must already exist in the repo')
         choice(name: 'accept_cpd_license', choices: ['accept','reject'], description: 'Read and accept license at https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?li_formnum=L-DNAA-BZTPEW, (accept / reject)')
         string(name: 'public_ssh_key', defaultValue: '', description: 'Public SSH key value')
-        choice(name: 'watson_knowledge_catalog', choices: ['no','yes'], description: 'Install Watson Knowledge catalog(yes/ no)')        
+        choice(name: 'cpd_platform_channel', choices: ['v1.0','v2.0'], description: 'Install Watson Knowledge catalog(yes/ no)')        
         booleanParam(name: 'autoApprove', defaultValue: false, description: 'Automatically run apply after generating plan?')
     }
 
@@ -58,7 +58,7 @@ pipeline {
                }
             }
         }
-        
+
         stage('Destroy') {
             steps {
                script {
