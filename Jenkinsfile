@@ -33,11 +33,6 @@ pipeline {
                 secret_access_key = "${params.AWS_SECRET_ACCESS_KEY}"
     }
     stages {
-        stage('fetch_latest_code') {
-          steps {
-                git credentialsId: 'github', url: 'https://github.com/IBM/cp4d-deployment'    
-            }
-        }
         stage('Initalize') {
             steps {
                script {
