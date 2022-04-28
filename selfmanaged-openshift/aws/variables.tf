@@ -1,7 +1,7 @@
 ##### AWS Configuration #####
 variable "region" {
   description = "The region to deploy the cluster in, e.g: us-west-2."
-  default     = "eu-west-1"
+  default     = "us-west-2"
 }
 
 variable "key_name" {
