@@ -16,7 +16,7 @@ pipeline {
         string(name: 'base_domain', defaultValue: 'cpdonawsonline.com', description: 'Route 53 domain')
         string(name: 'cluster_name', defaultValue: 'cpd-test', description: 'Cluster Name')
         string(name: 'worker_replica_count', defaultValue: '6', description: 'No of worker nodes')
-        string(name: 'openshift_pull_secret_file_path', defaultValue: '/root/redhat/pull-secret.txt', description: 'Openshift pull secret file path')
+        string(name: 'openshift_pull_secret_file_path', defaultValue: '/var/lib/jenkins/workspace/redhat/pull-secret.txt', description: 'Openshift pull secret file path')
         string(name: 'openshift_username', defaultValue: 'ocadmin', description: 'Openshift Username')
         string(name: 'openshift_password', defaultValue: 'password', description: 'Openshft Password')
         string(name: 'cpd_api_key', defaultValue: '', description: 'Repository APIKey or Registry password')
