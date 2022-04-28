@@ -32,6 +32,7 @@ pipeline {
                 access_key_id     = "${params.AWS_ACCESS_KEY_ID}"
                 secret_access_key = "${params.AWS_SECRET_ACCESS_KEY}"
     }
+
     stages {
         stage('Initalize') {
             steps {
@@ -41,6 +42,7 @@ pipeline {
                }
             }
         }
+
         stage('Plan') {
             steps {
                script {
@@ -48,6 +50,7 @@ pipeline {
                }
             }
         }
+
         stage('Apply') {
             steps {
                script {
@@ -55,6 +58,7 @@ pipeline {
                }
             }
         }
+        
         stage('Destroy') {
             steps {
                script {
