@@ -59,18 +59,19 @@ pipeline {
             }
         }
 
-        stage('Destroy') {
-            steps {
-               script {
-                   gv.tfDestroy()
-               }
-            }
-        }
+        // stage('Destroy') {
+        //     steps {
+        //        script {
+        //            gv.tfDestroy()
+        //        }
+        //     }
+        // }
     }
 
     post {
         always{
                 script {
+                    echo 'Performing terraform destroy'
                    gv.tfDestroy()
                }
         }
