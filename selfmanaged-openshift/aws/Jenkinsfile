@@ -53,7 +53,7 @@ pipeline {
         stage('Initalize') {
             steps {
                script {
-                   gv = load "script.groovy"
+                   gv = load "selfmanaged-openshift/aws/script.groovy"
                    gv.tfInitalize()
                }
             }
