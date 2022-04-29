@@ -10,17 +10,15 @@ pipeline {
         string(name: 'az', defaultValue: 'single_zone', description: 'single_zone / multi_zone')
         password (name: 'AWS_ACCESS_KEY_ID')
         password (name: 'AWS_SECRET_ACCESS_KEY')
-        string(name: 'base_domain', defaultValue: 'cpdonawsonline.com', description: 'Route 53 domain')
+        password (name: 'ROSA_TOKEN')
         string(name: 'cluster_name', defaultValue: 'cpd-test', description: 'Cluster Name')
-        string(name: 'worker_replica_count', defaultValue: '6', description: 'No of worker nodes')
-        string(name: 'openshift_pull_secret_file_path', defaultValue: '/var/lib/jenkins/workspace/redhat/pull-secret.txt', description: 'Openshift pull secret file path')
-        string(name: 'openshift_username', defaultValue: 'ocadmin', description: 'Openshift Username')
-        string(name: 'openshift_password', defaultValue: 'password', description: 'Openshft Password')
+        string(name: 'worker_machine_type', defaultValue: 'm5.4xlarge', description: 'Worker Nodes Instance Type')
+        string(name: 'worker_machine_count', defaultValue: '6', description: 'No of worker nodes')
+        choice(name: 'private_cluster', choices: ['false','true'], description: 'Endpoints should resolve to Private IPs')   
         string(name: 'cpd_api_key', defaultValue: '', description: 'Repository APIKey or Registry password')
         string(name: 'cpd_external_registry', defaultValue: 'cp.icr.io', description: 'URL to external registry for CPD install. Note: CPD images must already exist in the repo')
         string(name: 'cpd_external_username', defaultValue: 'cp', description: 'URL to external username for CPD install. Note: CPD images must already exist in the repo')
         choice(name: 'accept_cpd_license', choices: ['accept','reject'], description: 'Read and accept license at https://www14.software.ibm.com/cgi-bin/weblap/lap.pl?li_formnum=L-DNAA-BZTPEW, (accept / reject)')
-        string(name: 'public_ssh_key', defaultValue: '', description: 'Public SSH key value')
         choice(name: 'cpd_platform_enable', choices: ['yes','no'], description: 'Install cpd platform (yes/ no)')
         choice(name: 'watson_knowledge_catalog_enable', choices: ['no','yes'], description: 'Install WKC (yes/ no)') 
         choice(name: 'data_virtualization_enable', choices: ['no','yes'], description: 'Install DV service (yes/ no)') 
@@ -43,13 +41,14 @@ pipeline {
     environment {
                 access_key_id     = "${params.AWS_ACCESS_KEY_ID}"
                 secret_access_key = "${params.AWS_SECRET_ACCESS_KEY}"
+                rosa_token = "${params.ROSA_TOKEN}"
     }
 
     stages {
         stage('Initalize') {
             steps {
                script {
-                   gv = load "selfmanaged-openshift/aws/script.groovy"
+                   gv = load "managed-openshift/aws/terraform/script.groovy"
                    gv.tfInitalize()
                }
             }
