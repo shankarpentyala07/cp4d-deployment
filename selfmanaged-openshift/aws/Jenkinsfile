@@ -6,7 +6,7 @@ pipeline {
     agent any
 
         parameters {
-        string(name: 'region', defaultValue: 'us-west-2', description: 'The region to deploy the cluster in, e.g: us-west-2.')
+        string(name: 'region', defaultValue: 'us-east-1', description: 'The region to deploy the cluster in, e.g: us-east-1.')
         string(name: 'az', defaultValue: 'single_zone', description: 'single_zone / multi_zone')
         password (name: 'AWS_ACCESS_KEY_ID')
         password (name: 'AWS_SECRET_ACCESS_KEY')
