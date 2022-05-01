@@ -53,9 +53,14 @@ pipeline {
 
     stages {
         
+        stage ('clean workspace') {
+            steps{
+                cleanWs()
+            }
+        }
         stage('fetch_latest_code') {
           steps {
-                cleanWs()
+                
                 git credentialsId: 'github', url: 'https://github.com/IBM/cp4d-deployment'    
             }
         }
