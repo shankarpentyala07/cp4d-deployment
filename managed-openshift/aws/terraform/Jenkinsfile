@@ -61,7 +61,7 @@ pipeline {
         stage('fetch_latest_code') {
           steps {
                 
-                git credentialsId: 'github', url: 'https://github.com/IBM/cp4d-deployment'    
+                git branch: 'jenkins-test', credentialsId: 'github', url: 'https://github.com/IBM/cp4d-deployment'    
             }
         }
 
