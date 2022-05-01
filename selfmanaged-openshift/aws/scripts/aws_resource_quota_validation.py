@@ -95,7 +95,8 @@ def get_quota_code_by_name_pattern(service_code, quota_name_pattern,
 def main():
     
     # Get resource related values from terraform config variables file
-    tf_var_file = os.path.dirname(os.path.abspath(__file__)) + '/../variables.tf'
+   # tf_var_file = os.path.dirname(os.path.abspath(__file__)) + '/../variables.tf'
+    tf_var_file = os.path.dirname(os.path.abspath(__file__)) + '/runtime_vars.tf'
     tf_config = get_terraform_configuration(tf_var_file)
 
     # Get the AWS configuration (credentials, region)

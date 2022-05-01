@@ -143,7 +143,8 @@ class AWSGenericHelper():
 
         cpd_svc_vcpu = AWSGenericHelper.cpd_services_vcpu
         for service in cpd_svc_vcpu:
-            if tf_config_json['variable'][service]['default'] == 'yes':
+            #if tf_config_json['variable'][service]['default'] == 'yes':
+            if tf_config_json['variable'][service]['default']['enable'] == 'yes':
                 services_vcpu += cpd_svc_vcpu[service]
 
         return services_vcpu

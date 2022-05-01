@@ -55,6 +55,216 @@ region = ${var.region}
 EOF
 }
 
+data "template_file" "runtime_variables" {
+    template = <<EOF
+variable "region" {
+  description = "The region to deploy the cluster in, e.g: us-west-2."
+  default     = "${var.region}"
+}
+variable "az" {
+  description = "single_zone / multi_zone"
+  default     = "${var.az}"
+}
+variable "ocs" {
+  type = map(string)
+  default = {
+    enable                       = ${var.ocs.enable}
+    ami_id                       = "${var.ocs.ami_id}"
+    dedicated_node_instance_type = "${var.ocs.dedicated_node_instance_type}"
+  }
+}
+variable "master_replica_count" {
+  type    = number
+  default = ${var.master_replica_count}
+}
+variable "worker_replica_count" {
+  type    = number
+  default = ${var.worker_replica_count}
+}
+variable "master_instance_type" {
+  type    = string
+  default = "${var.master_instance_type}"
+}
+variable "worker_instance_type" {
+  type    = string
+  default = "${var.worker_instance_type}"
+}
+variable "data_virtualization" {
+  type        = map(string)
+  default = {
+    enable   = "${var.data_virtualization.enable}"
+    version  = "${var.data_virtualization.version}"
+    channel  = "${var.data_virtualization.channel}"
+  }
+}
+variable "analytics_engine" {
+  type        = map(string)
+  default = {
+    enable   = "${var.analytics_engine.enable}"
+    version  = "${var.analytics_engine.version}"
+    channel  = "${var.analytics_engine.channel}"
+  }
+}
+variable "watson_knowledge_catalog" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_knowledge_catalog.enable}"
+    version  = "${var.watson_knowledge_catalog.version}"
+    channel  = "${var.watson_knowledge_catalog.channel}"
+  }
+}
+variable "watson_studio" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_studio.enable}"
+    version  = "${var.watson_studio.version}"
+    channel  = "${var.watson_studio.channel}"
+  }
+}
+variable "watson_machine_learning" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_machine_learning.enable}"
+    version  = "${var.watson_machine_learning.version}"
+    channel  = "${var.watson_machine_learning.channel}"
+  }
+}
+variable "watson_ai_openscale" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_ai_openscale.enable}"
+    version  = "${var.watson_ai_openscale.version}"
+    channel  = "${var.watson_ai_openscale.channel}"
+  }
+}
+variable "spss_modeler" {
+  type        = map(string)
+  default = {
+    enable   = "${var.spss_modeler.enable}"
+    version  = "${var.spss_modeler.version}"
+    channel  = "${var.spss_modeler.channel}"
+  }
+}
+variable "cognos_dashboard_embedded" {
+  type        = map(string)
+  default = {
+    enable   = "${var.cognos_dashboard_embedded.enable}"
+    version  = "${var.cognos_dashboard_embedded.version}"
+    channel  = "${var.cognos_dashboard_embedded.channel}"
+  }
+}
+variable "datastage" {
+  type        = map(string)
+  default = {
+    enable   = "${var.datastage.enable}"
+    version  = "${var.datastage.version}"
+    channel  = "${var.datastage.channel}"
+  }
+}
+variable "db2_warehouse" {
+  type        = map(string)
+  default = {
+    enable   = "${var.db2_warehouse.enable}"
+    version  = "${var.db2_warehouse.version}"
+    channel  = "${var.db2_warehouse.channel}"
+  }
+}
+variable "db2_oltp" {
+  type        = map(string)
+  default = {
+    enable   = "${var.db2_oltp.enable}"
+    version  = "${var.db2_oltp.version}"
+    channel  = "${var.db2_oltp.channel}"
+  }
+}
+variable "cognos_analytics" {
+  type        = map(string)
+  default = {
+    enable   = "${var.cognos_analytics.enable}"
+    version  = "${var.cognos_analytics.version}"
+    channel  = "${var.cognos_analytics.channel}"
+  }
+}
+variable "data_management_console" {
+  type        = map(string)
+  default = {
+    enable   = "${var.data_management_console.enable}"
+    version  = "${var.data_management_console.version}"
+    channel  = "${var.data_management_console.channel}"
+  }
+}
+variable "master_data_management" {
+  type        = map(string)
+  default = {
+    enable   = "${var.master_data_management.enable}"
+    version  = "${var.master_data_management.version}"
+    channel  = "${var.master_data_management.channel}"
+  }
+}
+variable "db2_aaservice" {
+  type        = map(string)
+  default = {
+    enable   = "${var.db2_aaservice.enable}"
+    version  = "${var.db2_aaservice.version}"
+    channel  = "${var.db2_aaservice.channel}"
+  }
+}
+variable "decision_optimization" {
+  type        = map(string)
+  default = {
+    enable   = "${var.decision_optimization.enable}"
+    version  = "${var.decision_optimization.version}"
+    channel  = "${var.decision_optimization.channel}"
+  }
+}
+variable "planning_analytics" {
+  type        = map(string)
+  default = {
+    enable   = "${var.planning_analytics.enable}"
+    version  = "${var.planning_analytics.version}"
+    channel  = "${var.planning_analytics.channel}"
+  }
+}
+variable "bigsql" {
+  type        = map(string)
+  default = {
+    enable   = "${var.bigsql.enable}"
+    version  = "${var.bigsql.version}"
+    channel  = "${var.bigsql.channel}"
+  }
+}
+variable "watson_assistant" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_assistant.enable}"
+    version  = "${var.watson_assistant.version}"
+    channel  = "${var.watson_assistant.channel}"
+  }
+}
+variable "watson_discovery" {
+  type        = map(string)
+  default = {
+    enable   = "${var.watson_discovery.channel}"
+    version  = "${var.watson_discovery.version}"
+    channel  = "${var.watson_discovery.channel}"
+  }
+}
+variable "openpages" {
+  type        = map(string)
+  default = {
+    enable   = "${var.openpages.enable}"
+    version  = "${var.openpages.version}"
+    channel  = "${var.openpages.channel}"
+  }
+}
+EOF
+}
+
+resource "local_file" "runtime_var_tf" {
+  content  = data.template_file.runtime_variables.rendered
+  filename = "scripts/runtime_vars.tf"
+}
+
 resource "null_resource" "permission_resource_validation" {
   count = var.enable_permission_quota_check ? 1 : 0
   provisioner "local-exec" {
