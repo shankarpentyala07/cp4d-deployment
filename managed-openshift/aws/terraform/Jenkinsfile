@@ -5,13 +5,18 @@ def gv
 pipeline {
     agent any
 
+        options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
+
         parameters {
         string(name: 'region', defaultValue: 'us-west-2', description: 'The region to deploy the cluster in, e.g: us-west-2.')
         string(name: 'az', defaultValue: 'single_zone', description: 'single_zone / multi_zone')
         password (name: 'AWS_ACCESS_KEY_ID')
         password (name: 'AWS_SECRET_ACCESS_KEY')
         password (name: 'ROSA_TOKEN')
-        string(name: 'cluster_name', defaultValue: 'cpd-test', description: 'Cluster Name')
+        string(name: 'cluster_name', defaultValue: 'cpdrosajnks', description: 'Cluster Name')
         string(name: 'worker_machine_type', defaultValue: 'm5.4xlarge', description: 'Worker Nodes Instance Type')
         string(name: 'worker_machine_count', defaultValue: '6', description: 'No of worker nodes')
         choice(name: 'private_cluster', choices: ['false','true'], description: 'Endpoints should resolve to Private IPs')  
@@ -47,6 +52,14 @@ pipeline {
     }
 
     stages {
+        
+        stage('fetch_latest_code') {
+          steps {
+                cleanWs()
+                git credentialsId: 'github', url: 'https://github.com/IBM/cp4d-deployment'    
+            }
+        }
+
         stage('Initalize') {
             steps {
                script {
