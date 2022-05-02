@@ -5,6 +5,11 @@ def gv
 pipeline {
     agent any
 
+    options {
+        // This is required if you want to clean before build
+        skipDefaultCheckout(true)
+    }
+
         parameters {
         string(name: 'region', defaultValue: 'us-east-1', description: 'The region to deploy the cluster in, e.g: us-east-1.')
         string(name: 'az', defaultValue: 'single_zone', description: 'single_zone / multi_zone')
@@ -46,6 +51,20 @@ pipeline {
     }
 
     stages {
+
+        stage ('clean workspace') {
+            steps{
+                cleanWs()
+            }
+        }
+        
+        stage('fetch_latest_code') {
+          steps {
+                
+                git branch: 'jenkins_test', credentialsId: 'github', url: 'https://github.com/shankarpentyala07/cp4d-deployment.git'    
+            }
+        }
+
         stage('Initalize') {
             steps {
                script {
